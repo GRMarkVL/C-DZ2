@@ -4,20 +4,25 @@
 //782 -> 8
 //918 -> 1
 
-int number = new Random().Next(100, 1000);
-Console.WriteLine($"Случайное трёхзначное число -> {number}");
-int num = (number /10)%10; 
-Console.WriteLine($"{num}");
 
-// int number = new Random().Next(100, 1000);
-// Console.WriteLine($"Случайное трёхзначное число -> {number}");
+int SecondDigit(int num)
+{
+    int secondDigit = (num % 100)/10;
+    return secondDigit;
+}
 
-// void MaxDigit(int num)
-// {
-    
-//     int number = (num /10)%10; 
-//     Console.WriteLine($"{number}");
-// }
-
-// MaxDigit(number); 
-
+while (true)
+{
+    Console.Write($"Введите трёхзначное число: ");
+    int number = int.Parse(Console.ReadLine());
+    if (number > 99 && number < 1000)
+    {
+        Console.WriteLine($"{number} -> {SecondDigit(number)}");
+        break;
+    }
+    else
+    {
+        Console.WriteLine("Число не трёхзначное, повторите попытку");
+        continue;
+    }
+}
