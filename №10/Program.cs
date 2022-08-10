@@ -6,12 +6,18 @@
 
 int number = new Random().Next(100, 1000);
 Console.WriteLine($"Случайное трёхзначное число -> {number}");
+int num = (number /10)%10; 
+Console.WriteLine($"{num}");
 
-void MaxDigit(int num)
-{
+// int number = new Random().Next(100, 1000);
+// Console.WriteLine($"Случайное трёхзначное число -> {number}");
+
+// void MaxDigit(int num)
+// {
     
-    int number = (num /10)%10; 
-    Console.WriteLine($"{number}");
-}
+//     int number = (num /10)%10; 
+//     Console.WriteLine($"{number}");
+// }
 
-MaxDigit(number); 
+// MaxDigit(number); 
+
