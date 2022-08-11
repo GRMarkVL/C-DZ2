@@ -8,7 +8,7 @@
 int SecondDigit(int num)
 {
     int secondDigit = (num % 100)/10;
-    return secondDigit;
+    return secondDigit; //  возвращаемое значение
 }
 
 while (true)
