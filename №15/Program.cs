@@ -16,7 +16,7 @@ WeekDay();
 
 while(true)
  {
-    Console.Write("Введите цифру соответствующую дню недели: ");
+    Console.Write("Введите цифру : ");
     int number = int.Parse(Console.ReadLine());
     if (number > 0 && number < 8)
     {
@@ -26,7 +26,7 @@ while(true)
     }
     else
     {
-        Console.WriteLine("Вы ввели не соответсвующий цифру, попробуйте еще раз!");
+        Console.WriteLine("В недели всего 7 дней, попробуйте еще раз!");
         continue;
     }
  }
