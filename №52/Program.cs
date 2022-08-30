@@ -1,127 +1,69 @@
-﻿// Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве,
-//  и возвращает значение этого элемента или же указание, что такого элемента нет.
-
+﻿// Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
 // Например, задан массив:
-
 // 1 4 7 2
-
 // 5 9 2 3
-
 // 8 4 2 4
-
-// 1, 7 -> такого элемента в массиве нет
+// Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 
 Console.Clear();
-
-void PrintMatrix(int[,] matrix)
+void FillArray(double[,] array) 
 {
-    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        Console.Write("[");
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            if (j < matrix.GetLength(1) - 1) System.Console.Write($"{matrix[i, j],4},");
-            else Console.Write($"{matrix[i, j],4} ");
+            
+            array[i, j] = new Random().Next(-99, 100); 
         }
-        Console.WriteLine("]");
+
     }
 }
 
-void CheckPositiionMatrix(int rowPosition,int columPosition, int[,] array)
+void PrintArray(double[,] array) 
 {
-    try
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        Console.WriteLine($"{rowPosition}, {columPosition} -> {array[rowPosition-1,columPosition-1]}");
-    }
-    catch
-    {
-        Console.WriteLine($"{rowPosition}, {columPosition} -> такого элемента в массиве нет");
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write($"{array[i, j]} ");
+        }
+        Console.WriteLine();
     }
 }
 
-int[,] CreateMatrixRndInt(int min, int max)
+
+Console.WriteLine("введите число строк двумерно массива m:");
+int m = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("введите число столбцов двумерно массива n:");
+int n = Convert.ToInt32(Console.ReadLine());
+
+double[,] new_array = new double[m, n]; 
+FillArray(new_array); 
+Console.WriteLine($"Двумерный массива размера m={m} на n={n} имеет вид: ");
+PrintArray(new_array); 
+
+
+for (int i = 0; i < n; i++) 
 {
-    Random rnd = new Random();
-    int[,] matrix = new int[rnd.Next(2,10),rnd.Next(2,10)];
-    for (int i = 0; i < matrix.GetLength(0); i++)
-    {
-        for (int j = 0; j < matrix.GetLength(1); j++)
-        {
-            matrix[i,j] = rnd.Next(min,max);
-        }
-    }
-
-    return matrix;
-}
-
-int RowNumber()
-{
-    while (true)
-    {
-        try
-        {
-            Console.Write("Введите номер строки: ");
-            int mTmp = int.Parse(Console.ReadLine());
-
-            if (mTmp <= 0)
-            {
-                Console.WriteLine("Пожалуйста, введите значение больше нуля!");
-                Console.WriteLine();
-                continue;
-            }
-            else return mTmp;
-        }
-        catch 
-        {
-            Console.WriteLine("Ошибка! Некорректный формат! Повторите попытку!");
-            Console.WriteLine();
-            continue;
-        }
-    }
-}
-
-int ColumNumber()
-{
-    while (true)
-    {
-        try
-        {
-            Console.Write("Введите номер столбца: ");
-            int nTmp = int.Parse(Console.ReadLine());
-
-            if (nTmp <= 0)
-            {
-                Console.WriteLine("Пожалуйста, введите значение больше нуля!");
-                Console.WriteLine();
-                continue;
-            }
-            else return nTmp;
-        }
-        catch 
-        {
-            Console.WriteLine("Ошибка! Некорректный формат! Повторите попытку!");
-            Console.WriteLine();
-            continue;
-        }
-    }
-}
-
-System.Console.WriteLine("Введите позиции элемента: ");
-
+  double sredArifmStolbec = 0;
+   for (int j = 0; j < m; j++) 
+   {
+     sredArifmStolbec = sredArifmStolbec + new_array[j, i];
+   }
+  sredArifmStolbec = Math.Round(sredArifmStolbec / m, 1); 
+   
+   Console.WriteLine($"Сред.арифметическое столбца {i+1} = {sredArifmStolbec}");
+ }
 Console.WriteLine();
 
-int rowPos = RowNumber();
+for (int i = 0; i < m; i++) 
+{
+  double sredArifmStroka = 0;
+  for (int j = 0; j < n; j++) 
+  {
+    sredArifmStroka = sredArifmStroka + new_array[i, j];
+  }
 
-int columPos = ColumNumber();
-
-Console.WriteLine();
-
-int[,] array2d = CreateMatrixRndInt(1, 10);
-
-PrintMatrix(array2d);
-
-Console.WriteLine();
-
-CheckPositiionMatrix(rowPos,columPos,array2d);
-
-Console.WriteLine();
+  sredArifmStroka = Math.Round(sredArifmStroka / n, 1);
+  Console.WriteLine($"Сред.арифметическое строки {i+1} = {sredArifmStroka}");
+}
